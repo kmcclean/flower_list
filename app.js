@@ -36,8 +36,14 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
           //Optional - turn 'red' into 'Red' for display
           var displayColor = color.slice(0,1).toUpperCase() + color.slice(1, color.length)
           //return res.render statement inside a callback to prevent further processing of response
+
+              console.log(err);
+              console.log('count?' + count);
+
           return res.render('allflowers',
              { 'flowers' : flowerDocs, 'currentColor' : displayColor, 'flowerColors' : colorDocs } );
+           
+
         });
       }
 
@@ -60,6 +66,10 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
         if (err) { console.log(err); return res.sendStatus(500); }
         //If other than 1 result, no results. Send 404 not found
         if (docs.length != 1) { console.log(docs);  return res.sendStatus(404); }
+
+
+
+
         return res.render('flowerDetails', docs[0]);
       });
 
@@ -92,7 +102,7 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
     });
   });
 
-  
+
   //All other requests, return 404 not found
   app.use(function(req, res){
     res.sendStatus(404);

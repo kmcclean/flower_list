@@ -1,15 +1,20 @@
+
 $(document).ready(function(){
 
   $("#flowerColor").click(function(){
 
-    var input = $("<input id=newColor placeholder='new color'></input>");
+    if ($('#newColor').length === 1) { return; }
+
+    var input = $("<input id='newColor' placeholder='new color'></input>");
     (input).insertAfter($(this))
     var instructions = $("<i>Press Enter to save, Esc to cancel</i>");
     instructions.insertAfter(input);
 
+
     input.keypress(function(event){
       //Submit changes by pressing enter
       if (event.which == 13) {
+
         //Database update via AJAX
         var newColor = $(this).val();
         var name = $("#flowerName").text();
@@ -26,6 +31,7 @@ $(document).ready(function(){
           });
         input.remove();
         instructions.remove();
+        edit = false;
       }
     })
 
@@ -34,6 +40,7 @@ $(document).ready(function(){
       if (event.which == 27){
         $(this).remove();
         instructions.remove();
+        edit = false;
       }
     })
   })

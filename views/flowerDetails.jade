@@ -1,0 +1,22 @@
+html
+  head
+
+  body
+
+    h1#flowerName #{name}
+
+    if image
+      img(src="/images/#{image}")
+    else
+      i Sorry, no image for #{name}
+
+    p #{name} is &#32;
+      span#flowerColor #{color}
+
+    p Visit this flower's Wikipedia page at the following link,
+
+    a(href="#{wiki}") #{wiki}
+
+
+    script(src="https://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js")
+    script(src="/javascripts/changeFlowerColor.js")

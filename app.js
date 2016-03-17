@@ -8,6 +8,8 @@ app = express();
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
 
+app.use(express.static('public'))
+
 //Attempt to connect to MongoDB.
 MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
 
@@ -42,8 +44,22 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
           return res.render('allFlowers', { 'flowers' : flowerDocs, 'flowerColors' : colorDocs } );
         });
       }
+    });
   });
-});
+
+
+  app.get('/details/:flower', function(req, res) {
+      var flowerName = req.params.flower;
+      //Find document with this flower's name. Only expecting one result so can
+      //use limit(1) function to minimise work for DB
+      db.collection('flowers').find( {'name' : flowerName } ).limit(1).toArray(function(err, docs) {
+        if (err) { console.log(err); return res.sendStatus(500); }
+        //If other than 1 result, no results. Send 404 not found
+        if (docs.length != 1) { console.log(docs);  return res.sendStatus(404); }
+        return res.render('flowerDetails', docs[0]);
+      });
+
+  });
 
   //All other requests, return 404 not found
   app.use(function(req, res){

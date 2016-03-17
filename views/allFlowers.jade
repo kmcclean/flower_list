@@ -1,7 +1,18 @@
 html
   head
   body
-    h1 Flowers
+    h1 #{currentColor} Flowers
+
+    form(action='/', method='get')
+      select(name='colorDropDown')
+        each color in flowerColors
+          option(value='#{color}') #{color}
+      input(type='submit' name='colorButton' value='Choose color')
+
     ul
       each flower in flowers
         li #{flower.name} is #{flower.color}
+
+    if currentColor
+      form(action'/' method='get')
+        input(type='submit' name='clearButton' value='Clear selection')

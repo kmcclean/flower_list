@@ -1,0 +1,6 @@
+db.flowers.insertOne({"name":"Rose", "color":"pink", "wiki":"https://en.wikipedia.org/wiki/Rose", "image":"rose.jpg"})
+db.flowers.insertOne({"name":"Bluebell", "color":"blue", "wiki":"https://en.wikipedia.org/wiki/Hyacinthoides", "image":"bluebell.jpg"})
+db.flowers.insertOne({"name":"Daisy", "color":"white", "wiki":"https://en.wikipedia.org/wiki/Bellis_perennis", "image":"daisy.jpg"})
+db.flowers.insertOne({"name":"Sunflower", "color":"yellow", "wiki":"https://en.wikipedia.org/wiki/Helianthus", "image":"sunflower.jpg"})
+db.flowers.insertOne({"name":"Tulip", "color":"red", "wiki":"https://en.wikipedia.org/wiki/Tulip", "image":"tulip.jpg"})
+db.flowers.insertOne({"name":"Sakura", "color":"pink", "wiki":"https://en.wikipedia.org/wiki/Cherry_blossom", "image":"sakura.jpg"})

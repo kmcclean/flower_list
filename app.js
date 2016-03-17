@@ -2,11 +2,15 @@ var express = require('express');
 var MongoClient = require('mongodb').MongoClient;
 var engines = require('jade');
 var assert= require('assert');
+var bodyParser = require('body-parser');
 
 app = express();
 
 app.set('view engine', 'jade');
 app.set('views', __dirname + '/views');
+
+//bodyParser needed to enable routes to extract request body, used in POST requests
+app.use(bodyParser.urlencoded({ extended : true }));
 
 app.use(express.static('public'))
 
@@ -61,6 +65,34 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
 
   });
 
+
+  app.post("/addNewFlower", function(req, res) {
+     db.collection("flowers").insert(req.body, function(err, result){
+       if (err) { return res.sendStatus(500); }
+       return res.redirect('/'); //todo send success/fail back to client.
+     });
+  });
+
+  app.put("/updateColor", function(req, res) {
+    //Filter is the flower with the given name
+    console.log(req.body);
+    var filter = { "name" : req.body.name }
+    var update = { $set : req.body } ;
+    //By default, findOneAndUpdate replaces the record with the update.
+    //So, here, need to use $set parameter to specify we want to update only the fields given.
+    db.collection("flowers").findOneAndUpdate(filter, update, function(err, result) {
+      if (err) {
+        console.log("Error when updating color " + err);
+        return res.sendStatus(500);
+      } else {
+        console.log("Updated - result: " + result)
+        return res.send({"color" : req.body.color});
+        //Send the updated color back. AJAX is expecting a response.
+      }
+    });
+  });
+
+  
   //All other requests, return 404 not found
   app.use(function(req, res){
     res.sendStatus(404);

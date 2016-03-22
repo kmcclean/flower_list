@@ -42,7 +42,7 @@ MongoClient.connect('mongodb://localhost:27017/garden', function(err, db){
 
           return res.render('allflowers',
              { 'flowers' : flowerDocs, 'currentColor' : displayColor, 'flowerColors' : colorDocs } );
-           
+
 
         });
       }

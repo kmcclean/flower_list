@@ -1,6 +1,9 @@
 html
   head
+  
+    link(rel="stylesheet", href="/stylesheets/flower_style.css")
   body
+    script(src="/javascripts/form_filled.js")
     h1 #{currentColor} Flowers
 
     form(action='/', method='get')
@@ -31,4 +34,4 @@ html
           input#newFlowerColor(name="color" type="text" placeholder="color")
         p Wikipedia Page
          input#newFlowerLink(name="wiki" type="text" placeholder="wikipedia link")
-        button#saveNewFlower Save
+        button(onclick='check_forms()')#saveNewFlower Save

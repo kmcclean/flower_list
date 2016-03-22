@@ -5,15 +5,15 @@ html
 
     h1#flowerName #{name}
 
-    if image
-      img(src="/images/#{image}")
-    else
-      i Sorry, no image for #{name}
+    
+    
+    
+    img(src="/images/#{name}.jpg")
 
     p #{name} is &#32;
       span#flowerColor #{color}
 
-    p Visit this flower's Wikipedia page at the following link,
+    p Visit this flower's Wikipedia page at the following link:
 
     a(href="#{wiki}") #{wiki}
 

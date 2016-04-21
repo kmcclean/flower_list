@@ -21,17 +21,16 @@ html
       form(action'/' method='get')
         input(type='submit' name='clearButton' value='Clear selection')
 
-
     //Form to add new flower - Name, Color and Wikipedia page. TODO - upload picture.
     #addNewFlower
 
       h2 Add New Flower
-
-      form(action="addNewFlower", method="post")
+      
+      form(action='/addNewFlower', method="post")
         p Name
-          input#newFlowerName(name="name" type="text" placeholder="name")
+          input#newFlowerName(name="name" type="string" placeholder="name")
         p Color
           input#newFlowerColor(name="color" type="text" placeholder="color")
         p Wikipedia Page
          input#newFlowerLink(name="wiki" type="text" placeholder="wikipedia link")
-        button(onclick='check_forms()')#saveNewFlower Save
+        button(type='submit', value='check_if_filled(name, color)')#saveNewFlower Save
